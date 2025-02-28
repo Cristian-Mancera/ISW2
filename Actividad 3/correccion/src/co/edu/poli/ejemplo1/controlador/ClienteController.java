@@ -17,9 +17,11 @@ public class ClienteController {
 		try {
 
 			Connection conexion = GestionConexion.obtenerConexion();
+			System.out.println("conexion establecida");
 
 			clienteDAO = new ClienteImplementacionDAO();
-			GestionConexion.cerrarConexion();
+			
+			
 
 		} catch (SQLException | IOException e) {
 

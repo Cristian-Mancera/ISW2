@@ -1,11 +1,10 @@
 package co.edu.poli.ejemplo1.servicios;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
+import java.util.ResourceBundle;
 
 public class GestionConexion {
 
@@ -15,28 +14,18 @@ public class GestionConexion {
     }
 
     public static Connection obtenerConexion() throws SQLException, IOException {
-    	 Properties properties = new Properties();
-         
         
-         try (InputStream input = GestionConexion.class.getClassLoader().getResourceAsStream("config.properties")) {
-             if (input == null) {
-                 System.out.println("No se pudo encontrar el archivo config.properties");
-                 return null;
-             }
-             
-            
-             properties.load(input);
-         }
-
-         
-         String dbUrl = properties.getProperty("db.url");
-         String dbUsername = properties.getProperty("db.username");
-         String dbPassword = properties.getProperty("db.password");
+        ResourceBundle bundle = ResourceBundle.getBundle("config");
 
        
-         conexion = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+        String dbUrl = bundle.getString("db.url");
+        String dbUsername = bundle.getString("db.username");
+        String dbPassword = bundle.getString("db.password");
 
-         return conexion;
+        
+        conexion = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+        return conexion;
     }
 
     public static void cerrarConexion() throws SQLException {
@@ -45,4 +34,3 @@ public class GestionConexion {
         }
     }
 }
-
