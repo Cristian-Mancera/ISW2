@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.ejemplo1.controlador.FormController">
+   <children>
+      <Separator layoutY="92.0" prefHeight="6.0" prefWidth="533.0" />
+      <TextField fx:id="txt1" layoutX="14.0" layoutY="14.0" promptText="id" />
+      <TextField fx:id="txt2" layoutX="14.0" layoutY="49.0" promptText="nombre" />
+      <Button fx:id="bttsave" layoutX="223.0" layoutY="14.0" mnemonicParsing="false" onAction="#save" prefHeight="27.0" prefWidth="58.0" text="save" />
+      <Button fx:id="bttDelete" layoutX="223.0" layoutY="49.0" mnemonicParsing="false" onAction="#Delete" text="Delete" />
+      <Button fx:id="bttEdit" layoutX="223.0" layoutY="107.0" mnemonicParsing="false" onAction="#Edit" prefHeight="27.0" prefWidth="58.0" text="Edit" />
+      <Button fx:id="bttCopy" layoutX="23.0" layoutY="483.0" mnemonicParsing="false" onAction="#Copy" prefHeight="27.0" prefWidth="58.0" text="Copy" />
+      <TableView fx:id="tbl" layoutX="23.0" layoutY="153.0" prefHeight="321.0" prefWidth="482.0">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="100" text="Id" />
+          <TableColumn fx:id="colNombre" prefWidth="100" text="Nombre" />
+        </columns>
+      </TableView>
+      <TextField fx:id="txt3" layoutX="14.0" layoutY="107.0" promptText="id a editar" />
+   </children>
+</AnchorPane>
