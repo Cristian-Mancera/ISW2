@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import co.edu.poli.ejemplo1.modelo.AdaptadorNequi;
 import co.edu.poli.ejemplo1.modelo.AdaptadorPayPal;
+import co.edu.poli.ejemplo1.modelo.Departamento;
+import co.edu.poli.ejemplo1.modelo.Empleado;
 
 public class Main extends Application {
 
@@ -54,6 +56,18 @@ public class Main extends Application {
 		System.out.println("-> Pago de $" + montoPayPal + " adaptado desde PayPal a Nequi" + " al número: "
 				+ adaptadorNequi.getNumeroTelefono() + "\n");
 
+		Empleado empleado1 = new Empleado("Juan Pérez", "Desarrollador");
+		Empleado empleado2 = new Empleado("Ana Gómez", "Diseñadora");
+
+		Departamento deptoIT = new Departamento("TI");
+		deptoIT.agregar(empleado1);
+		deptoIT.agregar(empleado2);
+
+		Departamento empresa = new Departamento("Empresa");
+		empresa.agregar(deptoIT);
+		empresa.agregar(new Empleado("Carlos López", "Gerente"));
+
+		empresa.mostrarInformacion();
 		launch();
 	}
 
