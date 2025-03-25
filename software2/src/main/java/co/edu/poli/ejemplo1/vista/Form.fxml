@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.ejemplo1.controlador.FormController">
+  <tabs>
+    <Tab text="Cliente">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="txt1" layoutX="14.0" layoutY="14.0" promptText="id" />
+                  <TextField fx:id="txt2" layoutX="14.0" layoutY="53.0" promptText="nombre" />
+                  <Button fx:id="bttsave" layoutX="213.0" layoutY="14.0" mnemonicParsing="false" onAction="#save" prefHeight="27.0" prefWidth="58.0" text="Save" />
+                  <Button fx:id="bttDelete" layoutX="213.0" layoutY="53.0" mnemonicParsing="false" onAction="#Delete" text="Delete" />
+                  <Separator layoutX="13.0" layoutY="97.0" prefHeight="0.0" prefWidth="600.0" />
+                  <TextField fx:id="txt3" layoutX="14.0" layoutY="117.0" promptText="id" />
+                  <Button fx:id="bttEdit" layoutX="213.0" layoutY="117.0" mnemonicParsing="false" onAction="#Edit" prefHeight="27.0" prefWidth="57.0" text="Edit" />
+                  <TableView fx:id="tbl" layoutX="14.0" layoutY="153.0" prefHeight="270.0" prefWidth="573.0">
+                    <columns>
+                      <TableColumn fx:id="colId" prefWidth="75.0" text="Id" />
+                      <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Producto">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="464.0" prefWidth="600.0" scaleShape="false">
+               <children>
+                  <Button fx:id="bttCopy" layoutX="74.0" layoutY="147.0" mnemonicParsing="false" onAction="#Copy" text="copy" />
+                  <TableView fx:id="tblp" layoutX="17.0" layoutY="185.0" prefHeight="241.0" prefWidth="566.0">
+                    <columns>
+                      <TableColumn fx:id="colIdp" prefWidth="75.0" text="Id" />
+                      <TableColumn fx:id="colDescrbp" prefWidth="396.0" text="Descripción" />
+                        <TableColumn fx:id="colinfo" minWidth="0.0" prefWidth="94.0" text="info add" />
+                    </columns>
+                  </TableView>
+                  <TextField fx:id="txt5" layoutX="14.0" layoutY="14.0" promptText="id" />
+                  <TextField fx:id="txt6" layoutX="14.0" layoutY="85.0" prefHeight="46.0" prefWidth="480.0" promptText="descripcion" />
+                  <Button fx:id="bttsavep" layoutX="17.0" layoutY="147.0" mnemonicParsing="false" onAction="#savep" text="save" />
+                  <TextField fx:id="txt7" layoutX="15.0" layoutY="50.0" promptText="info add" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Patrones">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="bttBuilder" layoutX="14.0" layoutY="27.0" mnemonicParsing="false" onAction="#builder" prefHeight="27.0" prefWidth="79.0" text="Builder" />
+                  <TextArea fx:id="txtbuilder" layoutX="14.0" layoutY="65.0" prefHeight="65.0" prefWidth="555.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>
