@@ -68,6 +68,7 @@ public class Main extends Application {
 		empresa.agregar(new Empleado("Carlos López", "Gerente"));
 
 		empresa.mostrarInformacion();
+		
 		launch();
 	}
 

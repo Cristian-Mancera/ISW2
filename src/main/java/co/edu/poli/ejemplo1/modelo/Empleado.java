@@ -1,6 +1,6 @@
 package co.edu.poli.ejemplo1.modelo;
 
-public class Empleado implements Componente { // Agrega "public"
+public class Empleado implements Componente {
 	private String nombre;
 	private String puesto;
 
