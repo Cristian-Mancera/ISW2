@@ -8,9 +8,13 @@ import java.util.Random;
 
 import co.edu.poli.ISW2.servicios.ClienteImplementacionDAO;
 import co.edu.poli.ISW2.servicios.GestionConexion;
+import co.edu.poli.ISW2modelo.BuilderCertificacion;
+import co.edu.poli.ISW2modelo.BuilderEvaluacion;
+import co.edu.poli.ISW2modelo.BuilderPoliticaEntrega;
 import co.edu.poli.ISW2modelo.Cliente;
 import co.edu.poli.ISW2modelo.Producto;
 import co.edu.poli.ISW2modelo.ProductoAlimento;
+import co.edu.poli.ISW2modelo.Proveedor;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -236,6 +240,27 @@ public class FormController {
 				return new SimpleStringProperty("");
 			}
 		});
+	}
+
+	@FXML
+	void builder(ActionEvent event) {
+
+		BuilderEvaluacion evaluacion = new BuilderEvaluacion("Calificación de calidad", 90);
+		BuilderCertificacion certificacion = new BuilderCertificacion("ISO 9001", "2024-01-01");
+		BuilderPoliticaEntrega politicaDeEntrega = new BuilderPoliticaEntrega("30 días",
+				"Entrega gratuita en todo el país");
+
+		Proveedor proveedor = new Proveedor.ProveedorBuilder().conEvaluacion(evaluacion).conCertificacion(certificacion)
+				.conPoliticaDeEntrega(politicaDeEntrega).build();
+
+		String texto = "Proveedor\n";
+		texto += "Evaluación: " + evaluacion.getCriterio() + " - Puntuación: " + evaluacion.getPuntuacion() + "\n";
+		texto += "Certificación: " + certificacion.getNombreCertificacion() + " - Fecha: "
+				+ certificacion.getFechaEmision() + "\n";
+		texto += "Política de Entrega: " + politicaDeEntrega.getPlazo() + " - Condiciones: "
+				+ politicaDeEntrega.getCondiciones();
+
+		txtbuilder.setText(texto);
 	}
 
 }

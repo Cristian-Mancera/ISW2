@@ -34,7 +34,7 @@
                   <TableView fx:id="tblp" layoutX="17.0" layoutY="185.0" prefHeight="241.0" prefWidth="566.0">
                     <columns>
                       <TableColumn fx:id="colIdp" prefWidth="75.0" text="Id" />
-                      <TableColumn fx:id="colDescrbp" prefWidth="396.0" text="Descripciòn" />
+                      <TableColumn fx:id="colDescrbp" prefWidth="396.0" text="Descripción" />
                         <TableColumn fx:id="colinfo" minWidth="0.0" prefWidth="94.0" text="info add" />
                     </columns>
                   </TableView>
@@ -45,5 +45,15 @@
                </children></AnchorPane>
       </content>
     </Tab>
+      <Tab text="Patrones">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="bttBuilder" layoutX="14.0" layoutY="27.0" mnemonicParsing="false" onAction="#builder" prefHeight="27.0" prefWidth="79.0" text="Builder" />
+                  <TextArea fx:id="txtbuilder" layoutX="14.0" layoutY="65.0" prefHeight="65.0" prefWidth="555.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
   </tabs>
 </TabPane>
