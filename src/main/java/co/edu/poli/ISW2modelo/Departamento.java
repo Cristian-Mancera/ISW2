@@ -16,10 +16,13 @@ public class Departamento implements Componente {
 	}
 
 	@Override
-	public void mostrarInformacion() {
-		System.out.println("Departamento: " + nombre);
+	public String mostrarInformacion() {
+		String texto;
+
+		texto = "Departamento: " + nombre + "\n";
 		for (Componente c : componentes) {
-			c.mostrarInformacion();
+			texto += c.mostrarInformacion();
 		}
+		return texto;
 	}
 }

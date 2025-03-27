@@ -8,10 +8,14 @@ import java.util.Random;
 
 import co.edu.poli.ISW2.servicios.ClienteImplementacionDAO;
 import co.edu.poli.ISW2.servicios.GestionConexion;
+import co.edu.poli.ISW2modelo.AdaptadorNequi;
+import co.edu.poli.ISW2modelo.AdaptadorPayPal;
 import co.edu.poli.ISW2modelo.BuilderCertificacion;
 import co.edu.poli.ISW2modelo.BuilderEvaluacion;
 import co.edu.poli.ISW2modelo.BuilderPoliticaEntrega;
 import co.edu.poli.ISW2modelo.Cliente;
+import co.edu.poli.ISW2modelo.Departamento;
+import co.edu.poli.ISW2modelo.Empleado;
 import co.edu.poli.ISW2modelo.Producto;
 import co.edu.poli.ISW2modelo.ProductoAlimento;
 import co.edu.poli.ISW2modelo.Proveedor;
@@ -37,6 +41,12 @@ public class FormController {
 
 	@FXML
 	private TextField txt7;
+
+	@FXML
+	private Button bttAdapter;
+
+	@FXML
+	private Button bttComposite;
 
 	@FXML
 	private Button bttCopy;
@@ -94,6 +104,12 @@ public class FormController {
 
 	@FXML
 	private TableColumn<Cliente, String> colNombre;
+
+	@FXML
+	private TextArea txtadapter;
+
+	@FXML
+	private TextArea txtcomposite;
 
 	@FXML
 	void save(ActionEvent event) {
@@ -261,6 +277,54 @@ public class FormController {
 				+ politicaDeEntrega.getCondiciones();
 
 		txtbuilder.setText(texto);
+	}
+
+	@FXML
+	void adapter(ActionEvent event) {
+
+		AdaptadorPayPal adaptadorPayPal = new AdaptadorPayPal("paypal@gmail.com");
+		AdaptadorNequi adaptadorNequi = new AdaptadorNequi("3001234567", adaptadorPayPal);
+
+		adaptadorPayPal.conectarNequi(adaptadorNequi);
+
+		double montoNequi = 250.0;
+
+		String texto = "\n";
+		texto += "Iniciando pago desde Nequi por $" + montoNequi + " al número: " + adaptadorNequi.getNumeroTelefono();
+		adaptadorNequi.realizarPago(montoNequi);
+		texto += "\n-> Pago de $" + montoNequi + " adaptado desde Nequi a PayPal " + "al correo: "
+				+ adaptadorPayPal.getCorreo() + "\n";
+
+		double montoPayPal = 250.0;
+
+		texto += "Iniciando pago desde PayPal por $" + montoPayPal + " al correo: " + adaptadorPayPal.getCorreo();
+		adaptadorPayPal.realizarPago(montoPayPal);
+		texto += "\n-> Pago de $" + montoPayPal + " adaptado desde PayPal a Nequi" + " al número: "
+				+ adaptadorNequi.getNumeroTelefono() + "\n";
+
+		txtadapter.setText(texto);
+	}
+
+	@FXML
+	void composite(ActionEvent event) {
+
+		String texto = "\n";
+		Empleado empleado1 = new Empleado("Juan Pérez", "Desarrollador");
+		Empleado empleado2 = new Empleado("Ana Gómez", "Diseñadora");
+		Empleado empleado3 = new Empleado("Carlos López", "Gerente");
+
+		Departamento deptoIT = new Departamento("TI");
+		deptoIT.agregar(empleado1);
+		deptoIT.agregar(empleado2);
+		deptoIT.agregar(empleado3);
+
+		Departamento empresa = new Departamento("Empresa");
+		empresa.agregar(empleado3);
+		empresa.agregar(deptoIT);
+
+		texto = empresa.mostrarInformacion();
+
+		txtcomposite.setText(texto);
 	}
 
 }

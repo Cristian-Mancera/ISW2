@@ -10,7 +10,12 @@ public class Empleado implements Componente {
 	}
 
 	@Override
-	public void mostrarInformacion() {
-		System.out.println("Empleado: " + nombre + ", Puesto: " + puesto);
+	public String mostrarInformacion() {
+		String texto;
+
+		texto = "Empleado: " + nombre + ", Cargo: " + puesto + "\n";
+
+		return texto;
+
 	}
 }
