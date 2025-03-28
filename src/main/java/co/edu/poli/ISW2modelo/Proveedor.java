@@ -1,61 +1,24 @@
 package co.edu.poli.ISW2modelo;
 
 public class Proveedor {
-	private BuilderEvaluacion evaluacion;
-	private BuilderCertificacion certificacion;
-	private BuilderPoliticaEntrega politicaDeEntrega;
 
-	Proveedor(BuilderEvaluacion evaluacion, BuilderCertificacion certificacion,
-			BuilderPoliticaEntrega politicaDeEntrega) {
-		this.evaluacion = evaluacion;
-		this.certificacion = certificacion;
-		this.politicaDeEntrega = politicaDeEntrega;
-	}
 
-	public BuilderEvaluacion getEvaluacion() {
-		return evaluacion;
-	}
+	public <T> T construir(Builder<T> builder, String stepA, String stepB) {
+        builder.reset();
+        builder.buildStepA(stepA);
+        builder.buildStepB(stepB);
+        return builder.getResult();
+    }
 
-	public BuilderCertificacion getCertificacion() {
-		return certificacion;
-	}
+	
+	interface Builder <T>{
 
-	public BuilderPoliticaEntrega getPoliticaDeEntrega() {
-		return politicaDeEntrega;
-	}
+		void reset();
 
-	@Override
-	public String toString() {
-		return "Proveedor:\n" + evaluacion + "\n" + certificacion + "\n" + politicaDeEntrega;
-	}
+		void buildStepA(String valor);
 
-	public interface Builder {
-		Proveedor build();
-	}
+		void buildStepB(String valor);
 
-	public static class ProveedorBuilder implements Builder {
-		private BuilderEvaluacion evaluacion;
-		private BuilderCertificacion certificacion;
-		private BuilderPoliticaEntrega politicaDeEntrega;
-
-		public ProveedorBuilder conEvaluacion(BuilderEvaluacion evaluacion) {
-			this.evaluacion = evaluacion;
-			return this;
-		}
-
-		public ProveedorBuilder conCertificacion(BuilderCertificacion certificacion) {
-			this.certificacion = certificacion;
-			return this;
-		}
-
-		public ProveedorBuilder conPoliticaDeEntrega(BuilderPoliticaEntrega politicaDeEntrega) {
-			this.politicaDeEntrega = politicaDeEntrega;
-			return this;
-		}
-
-		@Override
-		public Proveedor build() {
-			return new Proveedor(evaluacion, certificacion, politicaDeEntrega);
-		}
+		T getResult();
 	}
 }

@@ -1,35 +1,26 @@
 package co.edu.poli.ISW2modelo;
 
-public class BuilderCertificacion implements Proveedor.Builder{
-	
-	private String nombreCertificacion;
-    private String fechaEmision;
+public class BuilderCertificacion implements Proveedor.Builder<Certificacion> {
+    
+	private Certificacion result;
 
-    // Constructor
-    public BuilderCertificacion(String nombreCertificacion, String fechaEmision) {
-        this.nombreCertificacion = nombreCertificacion;
-        this.fechaEmision = fechaEmision;
-    }
-
-    public String getNombreCertificacion() {
-        return nombreCertificacion;
-    }
-
-    public String getFechaEmision() {
-        return fechaEmision;
+    @Override
+    public void reset() {
+        result = new Certificacion();
     }
 
     @Override
-    public Proveedor build() {
-        return new Proveedor(null, new BuilderCertificacion(this.nombreCertificacion, this.fechaEmision), null);
+    public void buildStepA(String nombre) {
+        result.setNombre(nombre);
     }
 
     @Override
-    public String toString() {
-        return "Certificacion{" +
-               "nombreCertificacion='" + nombreCertificacion + '\'' +
-               ", fechaEmision='" + fechaEmision + '\'' +
-               '}';
+    public void buildStepB(String nivel) {
+        result.setNivel(nivel);
     }
 
+    @Override
+    public Certificacion getResult() {
+        return result;
+    }
 }

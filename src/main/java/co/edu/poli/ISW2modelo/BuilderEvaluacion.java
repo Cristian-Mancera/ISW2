@@ -1,35 +1,26 @@
 package co.edu.poli.ISW2modelo;
 
-public class BuilderEvaluacion implements Proveedor.Builder{
-	
-	private String criterio;
-    private int puntuacion;
+public class BuilderEvaluacion implements Proveedor.Builder<Evaluacion> {
 
-    // Constructor
-    public BuilderEvaluacion(String criterio, int puntuacion) {
-        this.criterio = criterio;
-        this.puntuacion = puntuacion;
-    }
+	private Evaluacion result;
 
-    public String getCriterio() {
-        return criterio;
-    }
+	@Override
+	public void reset() {
+		result = new Evaluacion();
+	}
 
-    public int getPuntuacion() {
-        return puntuacion;
-    }
+	@Override
+	public void buildStepA(String criterio) {
+		result.setCriterio(criterio);
+	}
 
-    @Override
-    public Proveedor build() {
-        return new Proveedor(new BuilderEvaluacion(this.criterio, this.puntuacion), null, null);  // Esto es solo un ejemplo, ajusta según lo que necesites.
-    }
+	@Override
+	public void buildStepB(String puntaje) {
+		result.setPuntaje(Integer.parseInt(puntaje));
+	}
 
-    @Override
-    public String toString() {
-        return "Evaluacion{" +
-               "criterio='" + criterio + '\'' +
-               ", puntuacion=" + puntuacion +
-               '}';
-    }
-
+	@Override
+	public Evaluacion getResult() {
+		return result;
+	}
 }

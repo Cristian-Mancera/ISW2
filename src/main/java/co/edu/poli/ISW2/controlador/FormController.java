@@ -12,10 +12,14 @@ import co.edu.poli.ISW2modelo.AdaptadorNequi;
 import co.edu.poli.ISW2modelo.AdaptadorPayPal;
 import co.edu.poli.ISW2modelo.BuilderCertificacion;
 import co.edu.poli.ISW2modelo.BuilderEvaluacion;
+
 import co.edu.poli.ISW2modelo.BuilderPoliticaEntrega;
+import co.edu.poli.ISW2modelo.Certificacion;
 import co.edu.poli.ISW2modelo.Cliente;
 import co.edu.poli.ISW2modelo.Departamento;
 import co.edu.poli.ISW2modelo.Empleado;
+import co.edu.poli.ISW2modelo.Evaluacion;
+import co.edu.poli.ISW2modelo.PoliticaEntrega;
 import co.edu.poli.ISW2modelo.Producto;
 import co.edu.poli.ISW2modelo.ProductoAlimento;
 import co.edu.poli.ISW2modelo.Proveedor;
@@ -261,22 +265,20 @@ public class FormController {
 	@FXML
 	void builder(ActionEvent event) {
 
-		BuilderEvaluacion evaluacion = new BuilderEvaluacion("Calificación de calidad", 90);
-		BuilderCertificacion certificacion = new BuilderCertificacion("ISO 9001", "2024-01-01");
-		BuilderPoliticaEntrega politicaDeEntrega = new BuilderPoliticaEntrega("30 días",
-				"Entrega gratuita en todo el país");
+		Proveedor proveedor = new Proveedor();
 
-		Proveedor proveedor = new Proveedor.ProveedorBuilder().conEvaluacion(evaluacion).conCertificacion(certificacion)
-				.conPoliticaDeEntrega(politicaDeEntrega).build();
+		BuilderEvaluacion builderEvaluacion = new BuilderEvaluacion();
+		Evaluacion evaluacion = proveedor.construir(builderEvaluacion, "Calidad del servicio", "90");
+		txtbuilder.appendText(evaluacion + "\n");
 
-		String texto = "Proveedor\n";
-		texto += "Evaluación: " + evaluacion.getCriterio() + " - Puntuación: " + evaluacion.getPuntuacion() + "\n";
-		texto += "Certificación: " + certificacion.getNombreCertificacion() + " - Fecha: "
-				+ certificacion.getFechaEmision() + "\n";
-		texto += "Política de Entrega: " + politicaDeEntrega.getPlazo() + " - Condiciones: "
-				+ politicaDeEntrega.getCondiciones();
+		BuilderCertificacion builderCertificacion = new BuilderCertificacion();
+		Certificacion certificacion = proveedor.construir(builderCertificacion, "ISO 9001", "Avanzado");
+		txtbuilder.appendText(certificacion + "\n");
 
-		txtbuilder.setText(texto);
+		BuilderPoliticaEntrega builderPolitica = new BuilderPoliticaEntrega();
+		PoliticaEntrega politica = proveedor.construir(builderPolitica, "3-5 días hábiles", "No entrega los domingos");
+		txtbuilder.appendText(politica + "\n");
+
 	}
 
 	@FXML

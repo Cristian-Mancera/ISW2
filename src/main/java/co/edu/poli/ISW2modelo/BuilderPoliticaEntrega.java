@@ -1,35 +1,26 @@
 package co.edu.poli.ISW2modelo;
 
-public class BuilderPoliticaEntrega implements Proveedor.Builder{
-	
-	 private String plazo;
-	    private String condiciones;
+public class BuilderPoliticaEntrega implements Proveedor.Builder<PoliticaEntrega> {
 
-	    // Constructor
-	    public BuilderPoliticaEntrega(String plazo, String condiciones) {
-	        this.plazo = plazo;
-	        this.condiciones = condiciones;
-	    }
+	 private PoliticaEntrega result;
 
-	    public String getPlazo() {
-	        return plazo;
-	    }
-
-	    public String getCondiciones() {
-	        return condiciones;
+	    @Override
+	    public void reset() {
+	        result = new PoliticaEntrega();
 	    }
 
 	    @Override
-	    public Proveedor build() {
-	        return new Proveedor(null, null, new BuilderPoliticaEntrega(this.plazo, this.condiciones));
+	    public void buildStepA(String tiempoEntrega) {
+	        result.setTiempoEntrega(tiempoEntrega);
 	    }
 
 	    @Override
-	    public String toString() {
-	        return "PoliticaDeEntrega{" +
-	               "plazo='" + plazo + '\'' +
-	               ", condiciones='" + condiciones + '\'' +
-	               '}';
+	    public void buildStepB(String restricciones) {
+	        result.setRestricciones(restricciones);
 	    }
 
+	    @Override
+	    public PoliticaEntrega getResult() {
+	        return result;
+	    }
 }
