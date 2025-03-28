@@ -1,4 +1,4 @@
-package co.edu.poli.ISW2modelo;
+package co.edu.poli.ISW2.modelo;
 
 public class BuilderEvaluacion implements Proveedor.Builder<Evaluacion> {
 

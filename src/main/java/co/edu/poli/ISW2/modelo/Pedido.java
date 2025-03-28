@@ -1,4 +1,4 @@
-package co.edu.poli.ISW2modelo;
+package co.edu.poli.ISW2.modelo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ public class Pedido {
 	private Cliente cliente;
 	private List<Producto> Producto = new ArrayList<>();
 
-	public Pedido(String numero, String fecha, Cliente cliente, List<co.edu.poli.ISW2modelo.Producto> producto) {
+	public Pedido(String numero, String fecha, Cliente cliente, List<co.edu.poli.ISW2.modelo.Producto> producto) {
 		super();
 		this.numero = numero;
 		this.fecha = fecha;
@@ -43,12 +43,12 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
-	public List<co.edu.poli.ISW2modelo.Producto> getProducto() {
+	public List<co.edu.poli.ISW2.modelo.Producto> getProducto() {
 		return Producto;
 	}
 
-	public void setProducto(co.edu.poli.ISW2modelo.Producto p1) {
-		Producto = (List<co.edu.poli.ISW2modelo.Producto>) p1;
+	public void setProducto(co.edu.poli.ISW2.modelo.Producto p1) {
+		Producto = (List<co.edu.poli.ISW2.modelo.Producto>) p1;
 	}
 
 	@Override

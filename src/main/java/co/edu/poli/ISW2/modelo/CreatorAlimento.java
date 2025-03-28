@@ -1,6 +1,6 @@
-package co.edu.poli.ISW2modelo;
+package co.edu.poli.ISW2.modelo;
 
-public class creatorAlimento extends Creator{
+public class CreatorAlimento extends Creator{
 
 	@Override
 	public Producto createProduct() {

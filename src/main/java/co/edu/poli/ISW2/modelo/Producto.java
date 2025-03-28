@@ -1,4 +1,4 @@
-package co.edu.poli.ISW2modelo;
+package co.edu.poli.ISW2.modelo;
 
 public abstract class Producto implements Cloneable, Prototype{
 

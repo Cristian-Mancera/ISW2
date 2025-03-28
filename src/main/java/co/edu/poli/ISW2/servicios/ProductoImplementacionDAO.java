@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import java.util.List;
 
-import co.edu.poli.ISW2modelo.Producto;
+import co.edu.poli.ISW2.modelo.Producto;
 
 public class ProductoImplementacionDAO implements specialProducto<Producto,String>{
 

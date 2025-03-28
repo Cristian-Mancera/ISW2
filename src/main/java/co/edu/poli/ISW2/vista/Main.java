@@ -8,10 +8,10 @@ import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-import co.edu.poli.ISW2modelo.AdaptadorNequi;
-import co.edu.poli.ISW2modelo.AdaptadorPayPal;
-import co.edu.poli.ISW2modelo.Departamento;
-import co.edu.poli.ISW2modelo.Empleado;
+import co.edu.poli.ISW2.modelo.AdaptadorNequi;
+import co.edu.poli.ISW2.modelo.AdaptadorPayPal;
+import co.edu.poli.ISW2.modelo.Departamento;
+import co.edu.poli.ISW2.modelo.Empleado;
 
 public class Main extends Application {
 

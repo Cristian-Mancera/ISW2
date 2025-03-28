@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.edu.poli.ISW2modelo.Cliente;
+import co.edu.poli.ISW2.modelo.Cliente;
 
 public class ClienteImplementacionDAO implements DAOCrud <Cliente, String>{
 
