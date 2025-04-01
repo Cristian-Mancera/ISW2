@@ -11,11 +11,18 @@ import co.edu.poli.ISW2.modelo.AdaptadorPayPal;
 import co.edu.poli.ISW2.modelo.BuilderCertificacion;
 import co.edu.poli.ISW2.modelo.BuilderEvaluacion;
 import co.edu.poli.ISW2.modelo.BuilderPoliticaEntrega;
+import co.edu.poli.ISW2.modelo.CargaFragil;
+import co.edu.poli.ISW2.modelo.CargaNormal;
 import co.edu.poli.ISW2.modelo.Certificacion;
 import co.edu.poli.ISW2.modelo.Cliente;
 import co.edu.poli.ISW2.modelo.Departamento;
+import co.edu.poli.ISW2.modelo.Documentos;
 import co.edu.poli.ISW2.modelo.Empleado;
+import co.edu.poli.ISW2.modelo.Envio;
 import co.edu.poli.ISW2.modelo.Evaluacion;
+import co.edu.poli.ISW2.modelo.Internacional;
+import co.edu.poli.ISW2.modelo.Mercancias;
+import co.edu.poli.ISW2.modelo.Nacional;
 import co.edu.poli.ISW2.modelo.PoliticaEntrega;
 import co.edu.poli.ISW2.modelo.Producto;
 import co.edu.poli.ISW2.modelo.ProductoAlimento;
@@ -41,6 +48,12 @@ public class FormController {
 	public FormController() {
 
 	}
+
+	@FXML
+	private TextArea txtBridge;
+
+	@FXML
+	private Button bttBridge;
 
 	@FXML
 	private TextField txt7;
@@ -326,6 +339,34 @@ public class FormController {
 		texto = empresa.mostrarInformacion();
 
 		txtcomposite.setText(texto);
+	}
+
+	@FXML
+	void bridge(ActionEvent event) {
+		
+		Mercancias documentos = new Documentos();
+        Mercancias cargaFragil = new CargaFragil();
+        Mercancias cargaNormal = new CargaNormal();
+
+        Envio envioInternacional = new Internacional(documentos);
+        Envio envioNacional = new Nacional(cargaFragil);
+
+    
+        envioInternacional.mostrarDetallesEnvio();
+        envioInternacional.enviar();
+
+        System.out.println();
+
+        envioNacional.mostrarDetallesEnvio();
+        envioNacional.enviar();
+
+        System.out.println();
+
+       
+        Envio envioNacional2 = new Nacional(cargaNormal);
+        envioNacional2.mostrarDetallesEnvio();
+        envioNacional2.enviar();
+
 	}
 
 }
