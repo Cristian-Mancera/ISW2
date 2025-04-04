@@ -8,19 +8,19 @@ public class Nacional extends Envio{
 	}
 
 	@Override
-	public void enviar() {
+	public String enviar() {
 		// TODO Auto-generated method stub
 		
-		 System.out.println("Enviando mercancía de forma nacional...");
+		 return "Enviando mercancía de forma nacional...";
 		
 	}
 
 	@Override
-	public void mostrarDetallesEnvio() {
+	public String mostrarDetallesEnvio() {
 		// TODO Auto-generated method stub
 		
-		   mercancia.MostrarDetalles();
-	        System.out.println("Envío Nacional");
+		   
+	        return mercancia.MostrarDetalles() + "\nEnvío Nacional";
 		
 	}
 

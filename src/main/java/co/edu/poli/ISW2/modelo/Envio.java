@@ -8,8 +8,8 @@ public abstract class Envio {
 		this.mercancia = mercancia;
 	}
 
-	public abstract void enviar(); 
+	public abstract String enviar(); 
 
-	public abstract void mostrarDetallesEnvio(); 
+	public abstract String mostrarDetallesEnvio(); 
 
 }

@@ -355,6 +355,8 @@ public class FormController {
 	@FXML
 	void bridge(ActionEvent event) {
 
+		String texto = "\n";
+		
 		Mercancias documentos = new Documentos();
 		Mercancias cargaFragil = new CargaFragil();
 		Mercancias cargaNormal = new CargaNormal();
@@ -362,50 +364,51 @@ public class FormController {
 		Envio envioInternacional = new Internacional(documentos);
 		Envio envioNacional = new Nacional(cargaFragil);
 
-		envioInternacional.mostrarDetallesEnvio();
-		envioInternacional.enviar();
+		texto += envioInternacional.mostrarDetallesEnvio();
+		texto += envioInternacional.enviar();
 
-		System.out.println();
+		texto += "\n\n";
 
-		envioNacional.mostrarDetallesEnvio();
-		envioNacional.enviar();
+		texto += envioNacional.mostrarDetallesEnvio();
+		texto += envioNacional.enviar();
 
-		System.out.println();
+		texto += "\n\n";
 
 		Envio envioNacional2 = new Nacional(cargaNormal);
-		envioNacional2.mostrarDetallesEnvio();
-		envioNacional2.enviar();
+		texto += envioNacional2.mostrarDetallesEnvio();
+		texto += envioNacional2.enviar();
+		
+		txtBridge.setText(texto);
 
 	}
-	
+
 	@FXML
-    void Decorator(ActionEvent event) {
-		
+	void Decorator(ActionEvent event) {
+
+		String texto = "\n";
+
 		CarritoNormal carrito = new CarritoNormal();
-        carrito.agregarItem("Camiseta", 20);
-        carrito.agregarItem("Pantalón", 30);
-        carrito.agregarItem("Zapatos", 50);
+		carrito.agregarItem("Camiseta", 20);
+		carrito.agregarItem("Pantalón", 30);
+		carrito.agregarItem("Zapatos", 50);
 
-        System.out.println("Precio original: " + carrito.precioTotal());
-        System.out.println("Descripción original: " + carrito.obtenerDescripcion());
+		texto += "Precio original: " + carrito.precioTotal();
+		texto += "Descripción original: " + carrito.obtenerDescripcion();
 
-        
-        CarritoDeCompras carritoConDescuento = new Descuento(carrito, 10);
-        System.out.println("\nPrecio con descuento: " + carritoConDescuento.precioTotal());
-        System.out.println("Descripción con descuento: " + carritoConDescuento.obtenerDescripcion());
+		CarritoDeCompras carritoConDescuento = new Descuento(carrito, 10);
+		texto += "\nPrecio con descuento: " + carritoConDescuento.precioTotal();
+		texto += "  Descripción con descuento: " + carritoConDescuento.obtenerDescripcion();
 
-      
-        CarritoDeCompras carritoConEnvioGratis = new EnvioGratis(carritoConDescuento);
-        System.out.println("\nPrecio con descuento y envío gratis: " + carritoConEnvioGratis.precioTotal());
-        System.out.println("Descripción con envío gratis: " + carritoConEnvioGratis.obtenerDescripcion());
+		CarritoDeCompras carritoConEnvioGratis = new EnvioGratis(carritoConDescuento);
+		texto += "\nPrecio con descuento y envío gratis: " + carritoConEnvioGratis.precioTotal();
+		texto += "  Descripción con envío gratis: " + carritoConEnvioGratis.obtenerDescripcion();
 
-  
-        CarritoDeCompras carritoConPuntos = new Puntos(carritoConEnvioGratis, 15);
-        System.out.println("\nPrecio con descuento, envío gratis y puntos: " + carritoConPuntos.precioTotal());
-        System.out.println("Descripción con puntos: " + carritoConPuntos.obtenerDescripcion());
-    
-   
+		CarritoDeCompras carritoConPuntos = new Puntos(carritoConEnvioGratis, 15);
+		texto += "\nPrecio con descuento, envío gratis y puntos: " + carritoConPuntos.precioTotal();
+		texto += "  Descripción con puntos: " + carritoConPuntos.obtenerDescripcion();
+		
+		txtDecorator.setText(texto);
 
-    }
+	}
 
 }

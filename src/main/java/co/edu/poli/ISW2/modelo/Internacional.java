@@ -8,19 +8,19 @@ public class Internacional extends Envio{
 	}
 
 	@Override
-	public void enviar() {
+	public String enviar() {
 		// TODO Auto-generated method stub
 		
-		System.out.println("Enviando mercancía de forma internacional...");
+		return "Enviando mercancía de forma internacional...";
 		
 	}
 
 	@Override
-	public void mostrarDetallesEnvio() {
+	public String mostrarDetallesEnvio() {
 		// TODO Auto-generated method stub
 		
-		mercancia.MostrarDetalles();
-        System.out.println("Envío Internacional");
+		
+        return mercancia.MostrarDetalles() + "\nEnvío Internacional";
 		
 	}
 
