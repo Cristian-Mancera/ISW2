@@ -13,12 +13,16 @@ import co.edu.poli.ISW2.modelo.BuilderEvaluacion;
 import co.edu.poli.ISW2.modelo.BuilderPoliticaEntrega;
 import co.edu.poli.ISW2.modelo.CargaFragil;
 import co.edu.poli.ISW2.modelo.CargaNormal;
+import co.edu.poli.ISW2.modelo.CarritoDeCompras;
+import co.edu.poli.ISW2.modelo.CarritoNormal;
 import co.edu.poli.ISW2.modelo.Certificacion;
 import co.edu.poli.ISW2.modelo.Cliente;
 import co.edu.poli.ISW2.modelo.Departamento;
+import co.edu.poli.ISW2.modelo.Descuento;
 import co.edu.poli.ISW2.modelo.Documentos;
 import co.edu.poli.ISW2.modelo.Empleado;
 import co.edu.poli.ISW2.modelo.Envio;
+import co.edu.poli.ISW2.modelo.EnvioGratis;
 import co.edu.poli.ISW2.modelo.Evaluacion;
 import co.edu.poli.ISW2.modelo.Internacional;
 import co.edu.poli.ISW2.modelo.Mercancias;
@@ -27,6 +31,7 @@ import co.edu.poli.ISW2.modelo.PoliticaEntrega;
 import co.edu.poli.ISW2.modelo.Producto;
 import co.edu.poli.ISW2.modelo.ProductoAlimento;
 import co.edu.poli.ISW2.modelo.Proveedor;
+import co.edu.poli.ISW2.modelo.Puntos;
 import co.edu.poli.ISW2.servicios.ClienteImplementacionDAO;
 import co.edu.poli.ISW2.servicios.GestionConexion;
 import javafx.beans.property.SimpleStringProperty;
@@ -48,6 +53,12 @@ public class FormController {
 	public FormController() {
 
 	}
+
+	@FXML
+	private TextArea txtDecorator;
+
+	@FXML
+	private Button bttDecorator;
 
 	@FXML
 	private TextArea txtBridge;
@@ -343,30 +354,58 @@ public class FormController {
 
 	@FXML
 	void bridge(ActionEvent event) {
-		
+
 		Mercancias documentos = new Documentos();
-        Mercancias cargaFragil = new CargaFragil();
-        Mercancias cargaNormal = new CargaNormal();
+		Mercancias cargaFragil = new CargaFragil();
+		Mercancias cargaNormal = new CargaNormal();
 
-        Envio envioInternacional = new Internacional(documentos);
-        Envio envioNacional = new Nacional(cargaFragil);
+		Envio envioInternacional = new Internacional(documentos);
+		Envio envioNacional = new Nacional(cargaFragil);
 
-    
-        envioInternacional.mostrarDetallesEnvio();
-        envioInternacional.enviar();
+		envioInternacional.mostrarDetallesEnvio();
+		envioInternacional.enviar();
 
-        System.out.println();
+		System.out.println();
 
-        envioNacional.mostrarDetallesEnvio();
-        envioNacional.enviar();
+		envioNacional.mostrarDetallesEnvio();
+		envioNacional.enviar();
 
-        System.out.println();
+		System.out.println();
 
-       
-        Envio envioNacional2 = new Nacional(cargaNormal);
-        envioNacional2.mostrarDetallesEnvio();
-        envioNacional2.enviar();
+		Envio envioNacional2 = new Nacional(cargaNormal);
+		envioNacional2.mostrarDetallesEnvio();
+		envioNacional2.enviar();
 
 	}
+	
+	@FXML
+    void Decorator(ActionEvent event) {
+		
+		CarritoNormal carrito = new CarritoNormal();
+        carrito.agregarItem("Camiseta", 20);
+        carrito.agregarItem("Pantalón", 30);
+        carrito.agregarItem("Zapatos", 50);
+
+        System.out.println("Precio original: " + carrito.precioTotal());
+        System.out.println("Descripción original: " + carrito.obtenerDescripcion());
+
+        
+        CarritoDeCompras carritoConDescuento = new Descuento(carrito, 10);
+        System.out.println("\nPrecio con descuento: " + carritoConDescuento.precioTotal());
+        System.out.println("Descripción con descuento: " + carritoConDescuento.obtenerDescripcion());
+
+      
+        CarritoDeCompras carritoConEnvioGratis = new EnvioGratis(carritoConDescuento);
+        System.out.println("\nPrecio con descuento y envío gratis: " + carritoConEnvioGratis.precioTotal());
+        System.out.println("Descripción con envío gratis: " + carritoConEnvioGratis.obtenerDescripcion());
+
+  
+        CarritoDeCompras carritoConPuntos = new Puntos(carritoConEnvioGratis, 15);
+        System.out.println("\nPrecio con descuento, envío gratis y puntos: " + carritoConPuntos.precioTotal());
+        System.out.println("Descripción con puntos: " + carritoConPuntos.obtenerDescripcion());
+    
+   
+
+    }
 
 }
