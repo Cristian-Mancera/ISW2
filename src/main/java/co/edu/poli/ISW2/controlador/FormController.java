@@ -13,6 +13,7 @@ import co.edu.poli.ISW2.modelo.BuilderEvaluacion;
 import co.edu.poli.ISW2.modelo.BuilderPoliticaEntrega;
 import co.edu.poli.ISW2.modelo.CargaFragil;
 import co.edu.poli.ISW2.modelo.CargaNormal;
+import co.edu.poli.ISW2.modelo.CargaPeligrosa;
 import co.edu.poli.ISW2.modelo.CarritoDeCompras;
 import co.edu.poli.ISW2.modelo.CarritoNormal;
 import co.edu.poli.ISW2.modelo.Certificacion;
@@ -24,6 +25,7 @@ import co.edu.poli.ISW2.modelo.Empleado;
 import co.edu.poli.ISW2.modelo.Envio;
 import co.edu.poli.ISW2.modelo.EnvioGratis;
 import co.edu.poli.ISW2.modelo.Evaluacion;
+import co.edu.poli.ISW2.modelo.Express;
 import co.edu.poli.ISW2.modelo.Internacional;
 import co.edu.poli.ISW2.modelo.Mercancias;
 import co.edu.poli.ISW2.modelo.Nacional;
@@ -356,13 +358,20 @@ public class FormController {
 	void bridge(ActionEvent event) {
 
 		String texto = "\n";
-		
+
 		Mercancias documentos = new Documentos();
 		Mercancias cargaFragil = new CargaFragil();
 		Mercancias cargaNormal = new CargaNormal();
+		Mercancias cargaPeligrosa = new CargaPeligrosa();
 
 		Envio envioInternacional = new Internacional(documentos);
 		Envio envioNacional = new Nacional(cargaFragil);
+		Envio envioExpress = new Express(cargaPeligrosa);
+
+		texto += envioExpress.mostrarDetallesEnvio();
+		texto += envioExpress.enviar();
+
+		texto += "\n\n";
 
 		texto += envioInternacional.mostrarDetallesEnvio();
 		texto += envioInternacional.enviar();
@@ -377,8 +386,10 @@ public class FormController {
 		Envio envioNacional2 = new Nacional(cargaNormal);
 		texto += envioNacional2.mostrarDetallesEnvio();
 		texto += envioNacional2.enviar();
-		
+
 		txtBridge.setText(texto);
+
+//		envio expres y mercancia peligrosa
 
 	}
 
@@ -406,7 +417,7 @@ public class FormController {
 		CarritoDeCompras carritoConPuntos = new Puntos(carritoConEnvioGratis, 15);
 		texto += "\nPrecio con descuento, envío gratis y puntos: " + carritoConPuntos.precioTotal();
 		texto += "  Descripción con puntos: " + carritoConPuntos.obtenerDescripcion();
-		
+
 		txtDecorator.setText(texto);
 
 	}
