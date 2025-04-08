@@ -11,15 +11,29 @@ import co.edu.poli.ISW2.modelo.AdaptadorPayPal;
 import co.edu.poli.ISW2.modelo.BuilderCertificacion;
 import co.edu.poli.ISW2.modelo.BuilderEvaluacion;
 import co.edu.poli.ISW2.modelo.BuilderPoliticaEntrega;
+import co.edu.poli.ISW2.modelo.CargaFragil;
+import co.edu.poli.ISW2.modelo.CargaNormal;
+import co.edu.poli.ISW2.modelo.CargaPeligrosa;
+import co.edu.poli.ISW2.modelo.CarritoDeCompras;
+import co.edu.poli.ISW2.modelo.CarritoNormal;
 import co.edu.poli.ISW2.modelo.Certificacion;
 import co.edu.poli.ISW2.modelo.Cliente;
 import co.edu.poli.ISW2.modelo.Departamento;
+import co.edu.poli.ISW2.modelo.Descuento;
+import co.edu.poli.ISW2.modelo.Documentos;
 import co.edu.poli.ISW2.modelo.Empleado;
+import co.edu.poli.ISW2.modelo.Envio;
+import co.edu.poli.ISW2.modelo.EnvioGratis;
 import co.edu.poli.ISW2.modelo.Evaluacion;
+import co.edu.poli.ISW2.modelo.Express;
+import co.edu.poli.ISW2.modelo.Internacional;
+import co.edu.poli.ISW2.modelo.Mercancias;
+import co.edu.poli.ISW2.modelo.Nacional;
 import co.edu.poli.ISW2.modelo.PoliticaEntrega;
 import co.edu.poli.ISW2.modelo.Producto;
 import co.edu.poli.ISW2.modelo.ProductoAlimento;
 import co.edu.poli.ISW2.modelo.Proveedor;
+import co.edu.poli.ISW2.modelo.Puntos;
 import co.edu.poli.ISW2.servicios.ClienteImplementacionDAO;
 import co.edu.poli.ISW2.servicios.GestionConexion;
 import javafx.beans.property.SimpleStringProperty;
@@ -41,6 +55,18 @@ public class FormController {
 	public FormController() {
 
 	}
+
+	@FXML
+	private TextArea txtDecorator;
+
+	@FXML
+	private Button bttDecorator;
+
+	@FXML
+	private TextArea txtBridge;
+
+	@FXML
+	private Button bttBridge;
 
 	@FXML
 	private TextField txt7;
@@ -326,6 +352,74 @@ public class FormController {
 		texto = empresa.mostrarInformacion();
 
 		txtcomposite.setText(texto);
+	}
+
+	@FXML
+	void bridge(ActionEvent event) {
+
+		String texto = "\n";
+
+		Mercancias documentos = new Documentos();
+		Mercancias cargaFragil = new CargaFragil();
+		Mercancias cargaNormal = new CargaNormal();
+		Mercancias cargaPeligrosa = new CargaPeligrosa();
+
+		Envio envioInternacional = new Internacional(documentos);
+		Envio envioNacional = new Nacional(cargaFragil);
+		Envio envioExpress = new Express(cargaPeligrosa);
+
+		texto += envioExpress.mostrarDetallesEnvio();
+		texto += envioExpress.enviar();
+
+		texto += "\n\n";
+
+		texto += envioInternacional.mostrarDetallesEnvio();
+		texto += envioInternacional.enviar();
+
+		texto += "\n\n";
+
+		texto += envioNacional.mostrarDetallesEnvio();
+		texto += envioNacional.enviar();
+
+		texto += "\n\n";
+
+		Envio envioNacional2 = new Nacional(cargaNormal);
+		texto += envioNacional2.mostrarDetallesEnvio();
+		texto += envioNacional2.enviar();
+
+		txtBridge.setText(texto);
+
+//		envio expres y mercancia peligrosa
+
+	}
+
+	@FXML
+	void Decorator(ActionEvent event) {
+
+		String texto = "\n";
+
+		CarritoNormal carrito = new CarritoNormal();
+		carrito.agregarItem("Camiseta", 20);
+		carrito.agregarItem("Pantalón", 30);
+		carrito.agregarItem("Zapatos", 50);
+
+		texto += "Precio original: " + carrito.precioTotal();
+		texto += "Descripción original: " + carrito.obtenerDescripcion();
+
+		CarritoDeCompras carritoConDescuento = new Descuento(carrito, 10);
+		texto += "\nPrecio con descuento: " + carritoConDescuento.precioTotal();
+		texto += "  Descripción con descuento: " + carritoConDescuento.obtenerDescripcion();
+
+		CarritoDeCompras carritoConEnvioGratis = new EnvioGratis(carritoConDescuento);
+		texto += "\nPrecio con descuento y envío gratis: " + carritoConEnvioGratis.precioTotal();
+		texto += "  Descripción con envío gratis: " + carritoConEnvioGratis.obtenerDescripcion();
+
+		CarritoDeCompras carritoConPuntos = new Puntos(carritoConEnvioGratis, 15);
+		texto += "\nPrecio con descuento, envío gratis y puntos: " + carritoConPuntos.precioTotal();
+		texto += "  Descripción con puntos: " + carritoConPuntos.obtenerDescripcion();
+
+		txtDecorator.setText(texto);
+
 	}
 
 }
