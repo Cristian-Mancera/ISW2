@@ -12,14 +12,18 @@ public class Facade {
 		this.infoP = infoP;
 	}
 
-	public void GestionarCliente(String cliente, String pedido, String tipoPago) {
-		System.out.println(infoP.MostrarInformacion(cliente));
-		System.out.println(infoP.ActualizarInformacion(cliente));
+	public String GestionarCliente(String cliente, String pedido, String tipoPago) {
 
-		System.out.println(historial.MostrarHistorial(pedido));
-		System.out.println(historial.RealizarPedido(pedido));
+		String texto = "\n";
+		texto += infoP.MostrarInformacion(cliente);
+		texto += infoP.ActualizarInformacion(cliente);
 
-		System.out.println(pago.VisualizarFormaPago(tipoPago));
-		System.out.println(pago.ActivarBloquearPago(tipoPago));
+		texto += historial.MostrarHistorial(pedido);
+		texto += historial.RealizarPedido(pedido);
+
+		texto += pago.VisualizarFormaPago(tipoPago);
+		texto += pago.ActivarBloquearPago(tipoPago);
+
+		return texto;
 	}
 }

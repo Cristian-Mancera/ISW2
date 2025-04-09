@@ -3,11 +3,11 @@ package co.edu.poli.ISW.modelo;
 public class FormasPagoActivas {
 
 	public String VisualizarFormaPago(String pago) {
-		return "Forma de pago seleccionada: " + pago;
+		return "Forma de pago seleccionada: " + pago + "\n";
 	}
 
 	public String ActivarBloquearPago(String pago) {
 
-		return "La forma de pago '" + pago + "' ha sido activada correctamente.";
+		return "La forma de pago '" + pago + "' ha sido activada correctamente." + "\n";
 	}
 }

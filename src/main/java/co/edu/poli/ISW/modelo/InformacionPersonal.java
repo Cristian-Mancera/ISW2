@@ -3,10 +3,10 @@ package co.edu.poli.ISW.modelo;
 public class InformacionPersonal {
 
 	public String MostrarInformacion(String nombre) {
-		return "Mostrando información del cliente: " + nombre;
+		return "Mostrando información del cliente: " + nombre + "\n";
 	}
 
 	public String ActualizarInformacion(String nombre) {
-		return "Información del cliente '" + nombre + "' ha sido actualizada.";
+		return "Información del cliente '" + nombre + "' ha sido actualizada." + "\n";
 	}
 }
