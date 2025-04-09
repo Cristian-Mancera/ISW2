@@ -7,21 +7,19 @@ public class Facade {
 	InformacionPersonal infoP;
 
 	public Facade(FormasPagoActivas pago, HistorialPedidos historial, InformacionPersonal infoP) {
-		super();
 		this.pago = pago;
 		this.historial = historial;
 		this.infoP = infoP;
 	}
 
-	public void GestionarCliente(String Cliente, String pedido, String tipoPago) {
+	public void GestionarCliente(String cliente, String pedido, String tipoPago) {
+		System.out.println(infoP.MostrarInformacion(cliente));
+		System.out.println(infoP.ActualizarInformacion(cliente));
 
-		infoP.MostrarInformacion(Cliente);
-		infoP.ActualizarInformacion(Cliente);
-		historial.MostrarHistorial(pedido);
-		historial.RealizarPedido(pedido);
-		pago.VisualizarFormaPago(tipoPago);
-		pago.ActivarBloquearPago(tipoPago);
+		System.out.println(historial.MostrarHistorial(pedido));
+		System.out.println(historial.RealizarPedido(pedido));
 
+		System.out.println(pago.VisualizarFormaPago(tipoPago));
+		System.out.println(pago.ActivarBloquearPago(tipoPago));
 	}
-
 }
