@@ -7,6 +7,9 @@ import co.edu.poli.ISW.modelo.FormasPagoActivas;
 import co.edu.poli.ISW.modelo.HistorialPedidos;
 import co.edu.poli.ISW.modelo.InformacionPersonal;
 import co.edu.poli.ISW.modelo.Producto;
+import co.edu.poli.ISW.modelo.Product;
+import co.edu.poli.ISW.modelo.ProductProxy;
+import co.edu.poli.ISW.modelo.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,6 +22,9 @@ public class ControladorFormulario {
 
 	@FXML
 	private Button bttFlyweight;
+
+	@FXML
+	private Button bttProxy;
 
 	@FXML
 	private TextArea txtArea1;
@@ -58,6 +64,23 @@ public class ControladorFormulario {
 
 		txtArea1.setText(texto);
 
+	}
+
+	@FXML
+	void Proxy(ActionEvent event) {
+
+		String texto = "\n";
+
+		Usuario admin = new Usuario("Alice", 7);
+		Usuario visitante = new Usuario("Bob", 2);
+
+		Product producto1 = new ProductProxy("Laptop Gamer", admin);
+		Product producto2 = new ProductProxy("Laptop Gamer", visitante);
+
+		texto += producto1.mostrarDetalles();
+		texto += producto2.mostrarDetalles();
+
+		txtArea1.setText(texto);
 	}
 
 }

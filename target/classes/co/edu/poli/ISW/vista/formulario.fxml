@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.ISW.controlador.ControladorFormulario">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.ISW.controlador.ControladorFormulario">
   <tabs>
     <Tab text="1">
       <content>
@@ -14,6 +17,7 @@
                   <Button fx:id="bttFlyweight" layoutX="113.0" layoutY="22.0" mnemonicParsing="false" onAction="#Flyweight" text="Flyweight" />
                   <TextArea fx:id="txtArea1" layoutX="16.0" layoutY="74.0" prefHeight="200.0" prefWidth="571.0" />
                   <Separator layoutY="62.0" prefHeight="0.0" prefWidth="600.0" />
+                  <Button fx:id="bttProxy" layoutX="193.0" layoutY="23.0" mnemonicParsing="false" onAction="#Proxy" text="Proxy" />
                </children></AnchorPane>
       </content>
     </Tab>

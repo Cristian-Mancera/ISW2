@@ -18,6 +18,7 @@ public class App extends Application {
 		TabPane root = (TabPane) FXMLLoader.load(getClass().getResource("/co/edu/poli/ISW/vista/formulario.fxml"));
 		scene = new Scene(root);
 		stage.setScene(scene);
+		stage.setTitle("ISW2");
 		stage.show();
 	}
 
@@ -31,6 +32,7 @@ public class App extends Application {
 	}
 
 	public static void main(String[] args) {
+		
 		launch();
 	}
 
