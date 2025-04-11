@@ -14,11 +14,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 public class ControladorFormulario {
 
 	@FXML
 	private Button bttfacade;
+
+	@FXML
+	private TextField txtproxy;
 
 	@FXML
 	private Button bttFlyweight;
@@ -71,14 +75,12 @@ public class ControladorFormulario {
 
 		String texto = "\n";
 
-		Usuario admin = new Usuario("Alice", 7);
-		Usuario visitante = new Usuario("Bob", 2);
+		int nivel = Integer.parseInt(txtproxy.getText());
+		Usuario usuario = new Usuario("Alice", nivel);
 
-		Product producto1 = new ProductProxy("Laptop Gamer", admin);
-		Product producto2 = new ProductProxy("Laptop Gamer", visitante);
+		Product producto1 = new ProductProxy("Laptop Gamer", usuario);
 
 		texto += producto1.mostrarDetalles();
-		texto += producto2.mostrarDetalles();
 
 		txtArea1.setText(texto);
 	}
