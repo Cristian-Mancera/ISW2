@@ -5,7 +5,9 @@ import co.edu.poli.ISW.modelo.FlyweightFactory;
 import co.edu.poli.ISW.modelo.FlyweightProveedor;
 import co.edu.poli.ISW.modelo.FormasPagoActivas;
 import co.edu.poli.ISW.modelo.HistorialPedidos;
+import co.edu.poli.ISW.modelo.HistorialPrecios;
 import co.edu.poli.ISW.modelo.InformacionPersonal;
+import co.edu.poli.ISW.modelo.Memento;
 import co.edu.poli.ISW.modelo.Producto;
 import co.edu.poli.ISW.modelo.Product;
 import co.edu.poli.ISW.modelo.ProductProxy;
@@ -17,6 +19,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class ControladorFormulario {
+
+	@FXML
+	private Button bttMemento;
 
 	@FXML
 	private Button bttfacade;
@@ -57,10 +62,13 @@ public class ControladorFormulario {
 
 		Producto[] productos = new Producto[4];
 
-		productos[0] = new Producto("Laptop", FlyweightFactory.getProveedor("TechCorp", "Av. Siempre Viva 123"));
-		productos[1] = new Producto("Mouse", FlyweightFactory.getProveedor("TechCorp", "Av. Siempre Viva 123"));
-		productos[2] = new Producto("Silla", FlyweightFactory.getProveedor("MueblesXYZ", "Calle Roble 456"));
-		productos[3] = new Producto("Escritorio", FlyweightFactory.getProveedor("MueblesXYZ", "Calle Roble 456"));
+		productos[0] = new Producto("Laptop", FlyweightFactory.getProveedor("TechCorp", "Av. Siempre Viva 123", ""),
+				texto);
+		productos[1] = new Producto("Mouse", FlyweightFactory.getProveedor("TechCorp", "Av. Siempre Viva 123", ""),
+				texto);
+		productos[2] = new Producto("Silla", FlyweightFactory.getProveedor("MueblesXYZ", "Calle Roble 456", ""), texto);
+		productos[3] = new Producto("Escritorio", FlyweightFactory.getProveedor("MueblesXYZ", "Calle Roble 456", ""),
+				texto);
 
 		for (Producto p : productos) {
 			texto += p.mostrarInfo();
@@ -83,6 +91,34 @@ public class ControladorFormulario {
 		texto += producto1.mostrarDetalles();
 
 		txtArea1.setText(texto);
+	}
+
+	@FXML
+	void memento(ActionEvent event) {
+
+		String texto = "\n";
+		Producto producto = new Producto("Laptop", null, "1200.0");
+		HistorialPrecios historial = new HistorialPrecios();
+
+		historial.guardarMemento(producto.guardarPrecio("2021"));
+		producto.cambiarPrecio("1300.0");
+		historial.guardarMemento(producto.guardarPrecio("2022"));
+		producto.cambiarPrecio("1400.0");
+		historial.guardarMemento(producto.guardarPrecio("2023"));
+
+		texto += "Precio actual: " + producto.getPrecio();
+		texto += "\n";
+
+		Memento precio2022 = historial.obtenerMemento("2022");
+		if (precio2022 != null) {
+			texto += producto.restaurarPrecio(precio2022);
+			texto += "\n";
+		}
+
+		texto += "Precio final después de restaurar: " + producto.getPrecio();
+		
+		txtArea1.setText(texto);
+
 	}
 
 }
