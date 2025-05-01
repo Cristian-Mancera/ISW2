@@ -8,7 +8,9 @@ import co.edu.poli.ISW.modelo.HistorialPedidos;
 import co.edu.poli.ISW.modelo.HistorialPrecios;
 import co.edu.poli.ISW.modelo.InformacionPersonal;
 import co.edu.poli.ISW.modelo.Memento;
+import co.edu.poli.ISW.modelo.NotificadorProductos;
 import co.edu.poli.ISW.modelo.Producto;
+import co.edu.poli.ISW.modelo.ProductoObserver;
 import co.edu.poli.ISW.modelo.Product;
 import co.edu.poli.ISW.modelo.ProductProxy;
 import co.edu.poli.ISW.modelo.Usuario;
@@ -37,6 +39,9 @@ public class ControladorFormulario {
 
 	@FXML
 	private TextArea txtArea1;
+
+	@FXML
+	private Button bttobserver;
 
 	@FXML
 	void facade(ActionEvent event) {
@@ -116,9 +121,40 @@ public class ControladorFormulario {
 		}
 
 		texto += "Precio final después de restaurar: " + producto.getPrecio();
-		
+
 		txtArea1.setText(texto);
 
+	}
+
+	@FXML
+	void observer(ActionEvent event) {
+		String texto = "\n";
+
+		Producto producto = new Producto("Laptop", null, "1200.0");
+		HistorialPrecios historial = new HistorialPrecios();
+
+		historial.guardarMemento(producto.guardarPrecio("2021"));
+		producto.cambiarPrecio("1300.0");
+		historial.guardarMemento(producto.guardarPrecio("2022"));
+		producto.cambiarPrecio("1400.0");
+		historial.guardarMemento(producto.guardarPrecio("2023"));
+
+		Memento precio2023 = historial.obtenerMemento("2023");
+
+		if (precio2023 != null) {
+			double precioOriginal = Double.parseDouble(precio2023.getPrecio());
+
+			NotificadorProductos notificador = new NotificadorProductos();
+			ProductoObserver observador = new ProductoObserver();
+			notificador.suscribir(observador);
+			notificador.notificar(precioOriginal);
+
+			texto += "Precio original: $" + precioOriginal + "\n";
+			texto += "Descuento aplicado: 10%\n";
+			texto += "Precio final con descuento: $" + observador.getPrecioFinal();
+		}
+
+		txtArea1.setText(texto);
 	}
 
 }

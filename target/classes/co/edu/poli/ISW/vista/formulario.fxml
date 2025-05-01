@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.ISW.controlador.ControladorFormulario">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.poli.ISW.controlador.ControladorFormulario">
   <tabs>
     <Tab text="1">
       <content>
@@ -23,6 +21,7 @@
                   <Button fx:id="bttProxy" layoutX="209.0" layoutY="22.0" mnemonicParsing="false" onAction="#Proxy" prefHeight="27.0" prefWidth="74.0" text="Proxy" />
                   <TextField fx:id="txtproxy" layoutX="209.0" layoutY="61.0" prefHeight="27.0" prefWidth="77.0" promptText="nivel acceso" />
                   <Button fx:id="bttMemento" layoutX="301.0" layoutY="22.0" mnemonicParsing="false" onAction="#memento" text="Memento" />
+                  <Button fx:id="bttobserver" layoutX="393.0" layoutY="22.0" mnemonicParsing="false" onAction="#observer" text="Observer" />
                </children></AnchorPane>
       </content>
     </Tab>
