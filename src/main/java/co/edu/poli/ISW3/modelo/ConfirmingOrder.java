@@ -3,13 +3,13 @@ package co.edu.poli.ISW3.modelo;
 public class ConfirmingOrder extends BaseHandler{
 	
 	@Override
-    protected boolean puedeManejar(Order pedido) {
+    protected boolean puedeManejar(Pedido pedido) {
         return true;
     }
 
     @Override
-    protected void ejecutar(Order pedido) {
-        System.out.println(" Pedido confirmado para " + pedido.getCliente().getNombre());
+	public String ejecutar(Pedido pedido) {
+        return " Pedido confirmado para " + pedido.getCliente().getNombre();
     }
 
 }

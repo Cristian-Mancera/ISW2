@@ -10,18 +10,18 @@ public abstract class BaseHandler implements Handler {
 	}
 
 	@Override
-	public void manejar(Order pedido) {
+	public void manejar(Pedido pedido) {
 		if (puedeManejar(pedido)) {
 			ejecutar(pedido);
 		} else if (siguiente != null) {
 			siguiente.manejar(pedido);
 		} else {
-			System.out.println("Ningún manejador pudo procesar el pedido.");
+			System.out.println("no se puede manejar");
 		}
 	}
 
-	protected abstract boolean puedeManejar(Order pedido);
+	protected abstract boolean puedeManejar(Pedido pedido);
 
-	protected abstract void ejecutar(Order pedido);
+	protected abstract String ejecutar(Pedido pedido);
 
 }

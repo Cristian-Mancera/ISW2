@@ -4,6 +4,6 @@ public interface Handler {
 
 	void setSiguiente(Handler siguiente);
 
-	void manejar(Order pedido);
+	void manejar(Pedido pedido);
 
 }

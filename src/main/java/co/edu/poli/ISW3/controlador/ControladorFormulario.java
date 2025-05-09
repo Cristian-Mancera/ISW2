@@ -17,22 +17,22 @@ public class ControladorFormulario {
 	private TextArea txtArea1;
 
 	@FXML
-	void memento(ActionEvent event) {
+	void Chain(ActionEvent event) {
 
 		String texto = "";
 
-		Client cliente = new Client("Lucas", 101);
-		texto += " Cliente creado: " + cliente.getNombre() + " (ID: " + cliente.getId() + ")";
+		Cliente cliente = new Cliente("101", "Robert");
+		texto += " Cliente: " + cliente.getNombre() + " (ID: " + cliente.getId() + ")";
 
 		texto += "\n";
-		Product producto = new Product("Teclado", 50.0, 3);
-		texto += " Producto creado: " + producto.getNombre() + " - Precio: $" + producto.getPrecio() + " - Stock: "
+		Producto producto = new Producto("Teclado", 50.0, 3);
+		texto += " Producto: " + producto.getNombre() + " - Precio: $" + producto.getPrecio() + " - Stock: "
 				+ producto.getStock();
 
 		texto += "\n";
 
-		Order pedido1 = new Order(cliente, producto, 2);
-		texto += " Pedido creado: " + pedido1.getCantidad() + " unidades de " + pedido1.getProducto().getNombre();
+		Pedido pedido1 = new Pedido(cliente, producto, 2);
+		texto += " Pedido: " + pedido1.getCantidad() + " unidades de " + pedido1.getProducto().getNombre();
 
 		texto += "\n";
 
@@ -43,27 +43,27 @@ public class ControladorFormulario {
 		verificador.setSiguiente(procesador);
 		procesador.setSiguiente(confirmador);
 
-		texto += "\n Procesando pedido con stock suficiente:";
+		texto += "\nProcesando pedido:";
 		verificador.manejar(pedido1);
-
-		texto += " Stock restante: " + producto.getStock() + "\n";
-
-		Order pedido2 = new Order(cliente, producto, 5);
-		texto += " Nuevo pedido creado: " + pedido2.getCantidad() + " unidades de " + pedido2.getProducto().getNombre();
-
-		texto += "\n Procesando pedido con stock insuficiente:";
-		verificador.manejar(pedido2);
+		texto += "\n";
+		texto += ((StockVerificator) verificador).ejecutar(pedido1);
+		texto += "\n";
+		texto += ((PaymentProcessor) procesador).ejecutar(pedido1);
+		texto += "\n";
+		texto += ((ConfirmingOrder) confirmador).ejecutar(pedido1);
+		texto += "\n";
+		texto += "Stock restante: " + producto.getStock() + "\n";
 
 		txtArea1.setText(texto);
 	}
 
-
+	@FXML
 	void Strategy(ActionEvent event) {
 
-		Producto teclado = new Producto("Teclado", 100);
-		Producto mouse = new Producto("Mouse", 50);
+		Producto teclado = new Producto("Teclado", 100, 0);
+		Producto mouse = new Producto("Mouse", 50, 0);
 
-		Pedido pedido = new Pedido();
+		Pedido pedido = new Pedido(null, mouse, 0);
 		pedido.agregarProducto(teclado);
 		pedido.agregarProducto(mouse);
 

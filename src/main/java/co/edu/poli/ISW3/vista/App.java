@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -13,7 +14,8 @@ public class App extends Application {
 
 	@Override
 	public void start(Stage stage) throws IOException {
-		scene = new Scene(loadFXML("Formulario"), 640, 480);
+		TabPane root = (TabPane) FXMLLoader.load(getClass().getResource("/co/edu/poli/ISW3/vista/formulario.fxml"));
+		scene = new Scene(root);
 		stage.setTitle("PATRONES");
 		stage.setScene(scene);
 		stage.show();
