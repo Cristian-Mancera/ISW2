@@ -9,7 +9,7 @@ public class ConfirmingOrder extends BaseHandler{
 
     @Override
 	public String ejecutar(Pedido pedido) {
-        return " Pedido confirmado para " + pedido.getCliente().getNombre();
+        return "Pedido confirmado para " + pedido.getCliente().getNombre();
     }
 
 }

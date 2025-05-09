@@ -29,14 +29,11 @@ public class Producto {
 	}
 
 	public void reducirStock(int cantidad) {
-		// TODO Auto-generated method stub
-		
 		this.stock = stock - cantidad;
 		
 	}
 
 	public boolean hayStock(int cantidad) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
