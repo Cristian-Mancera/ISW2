@@ -1,5 +1,8 @@
 package co.edu.poli.ISW3.controlador;
 
+import co.edu.poli.ISW3.modelo.Cliente;
+import co.edu.poli.ISW3.modelo.Pedido;
+import co.edu.poli.ISW3.modelo.Producto;
 import co.edu.poli.ISW3.modelo.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +14,17 @@ public class ControladorFormulario {
 	@FXML
 	private Button bttChain;
 
+	@FXML
 	private Button bttStrategy;
+
+	@FXML
+	private Button bttdescuento10;
+
+	@FXML
+	private Button bttdescuentofijo;
+
+	@FXML
+	private Button bttsindescuento;
 
 	@FXML
 	private TextArea txtArea1;
@@ -58,7 +71,7 @@ public class ControladorFormulario {
 	}
 
 	@FXML
-	void Strategy(ActionEvent event) {
+	void Descuento10(ActionEvent event) {
 
 		Producto teclado = new Producto("Teclado", 100, 0);
 		Producto mouse = new Producto("Mouse", 50, 0);
@@ -66,15 +79,33 @@ public class ControladorFormulario {
 		Pedido pedido = new Pedido(null, mouse, 0);
 		pedido.agregarProducto(teclado);
 		pedido.agregarProducto(mouse);
-
-		// Calcular sin descuento
-		pedido.setEstrategia(new SinDescuento());
-		double totalSinDescuento = pedido.calcularTotal();
-
+		
 		// Calcular con 10% de descuento
 		pedido.setEstrategia(new DescuentoPorcentaje(0.10));
 		double totalDescuentoPorcentaje = pedido.calcularTotal();
 
+		StringBuilder sb = new StringBuilder();
+		sb.append("Productos:\n");
+		for (Producto producto : pedido.getProductos()) {
+			sb.append("- ").append(producto.getNombre()).append(": $").append(producto.getPrecio()).append(" USD\n");
+		}
+
+		sb.append("\n");
+		sb.append("Total con 10% de descuento: $").append(totalDescuentoPorcentaje).append("\n");
+
+		txtArea1.setText(sb.toString());
+	}
+
+	@FXML
+	void DescuentoFijo(ActionEvent event) {
+
+		Producto teclado = new Producto("Teclado", 100, 0);
+		Producto mouse = new Producto("Mouse", 50, 0);
+
+		Pedido pedido = new Pedido(null, mouse, 0);
+		pedido.agregarProducto(teclado);
+		pedido.agregarProducto(mouse);
+		
 		// Calcular con descuento fijo de $20
 		pedido.setEstrategia(new DescuentoFijo(20));
 		double totalDescuentoFijo = pedido.calcularTotal();
@@ -86,11 +117,55 @@ public class ControladorFormulario {
 		}
 
 		sb.append("\n");
-		sb.append("Total sin descuento: $").append(totalSinDescuento).append("\n");
-		sb.append("Total con 10% de descuento: $").append(totalDescuentoPorcentaje).append("\n");
 		sb.append("Total con descuento fijo de $20: $").append(totalDescuentoFijo).append("\n");
 
 		txtArea1.setText(sb.toString());
+	}
+
+	@FXML
+	void SinDescuento(ActionEvent event) {
+
+		Producto teclado = new Producto("Teclado", 100, 0);
+		Producto mouse = new Producto("Mouse", 50, 0);
+
+		Pedido pedido = new Pedido(null, mouse, 0);
+		pedido.agregarProducto(teclado);
+		pedido.agregarProducto(mouse);
+		
+		// Calcular sin descuento
+		pedido.setEstrategia(new SinDescuento());
+		double totalSinDescuento = pedido.calcularTotal();
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("Productos:\n");
+		for (Producto producto : pedido.getProductos()) {
+			sb.append("- ").append(producto.getNombre()).append(": $").append(producto.getPrecio()).append(" USD\n");
+		}
+
+		sb.append("\n");
+		sb.append("Total sin descuento: $").append(totalSinDescuento).append("\n");
+
+		txtArea1.setText(sb.toString());
+	}
+
+	@FXML
+	void Strategy(ActionEvent event) {
+
+		Producto teclado = new Producto("Teclado", 100, 0);
+		Producto mouse = new Producto("Mouse", 50, 0);
+
+		Pedido pedido = new Pedido(null, mouse, 0);
+		pedido.agregarProducto(teclado);
+		pedido.agregarProducto(mouse);
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Productos:\n");
+		for (Producto producto : pedido.getProductos()) {
+			sb.append("- ").append(producto.getNombre()).append(": $").append(producto.getPrecio()).append(" USD\n");
+		}
+
+		txtArea1.setText(sb.toString());
+
 	}
 
 }
