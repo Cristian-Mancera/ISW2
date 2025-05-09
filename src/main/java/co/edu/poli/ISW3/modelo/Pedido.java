@@ -8,6 +8,7 @@ public class Pedido {
 	private Cliente cliente;
 	private Producto producto;
 	private int cantidad;
+	
 
 	public Pedido(Cliente cliente, Producto producto, int cantidad) {
 		this.cliente = cliente;

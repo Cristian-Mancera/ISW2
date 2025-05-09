@@ -526,13 +526,30 @@
 											"height": 13,
 											"text": "-cantidad: int",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGWtxI51wb7Axw=",
+											"_parent": {
+												"$ref": "AAAAAAGWsZUo5sSIDWw="
+											},
+											"model": {
+												"$ref": "AAAAAAGWtxI5mgb44xk="
+											},
+											"font": "Arial;13;0",
+											"left": 437,
+											"top": 371,
+											"width": 308.19140625,
+											"height": 13,
+											"text": "-cliente Cliente",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 432,
 									"top": 321,
 									"width": 318.19140625,
-									"height": 53
+									"height": 68
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -555,7 +572,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 437,
-											"top": 379,
+											"top": 394,
 											"width": 308.19140625,
 											"height": 13,
 											"text": "+agregarProducto(Producto producto): void",
@@ -572,7 +589,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 437,
-											"top": 394,
+											"top": 409,
 											"width": 308.19140625,
 											"height": 13,
 											"text": "+setEstrategia(estrategia: EstrategiaDescuento): void",
@@ -589,7 +606,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 437,
-											"top": 409,
+											"top": 424,
 											"width": 308.19140625,
 											"height": 13,
 											"text": "+calcularTotal(): double",
@@ -598,7 +615,7 @@
 									],
 									"font": "Arial;13;0",
 									"left": 432,
-									"top": 374,
+									"top": 389,
 									"width": 318.19140625,
 									"height": 53
 								},
@@ -643,7 +660,7 @@
 							"left": 432,
 							"top": 296,
 							"width": 318.19140625,
-							"height": 131,
+							"height": 146,
 							"nameCompartment": {
 								"$ref": "AAAAAAGWsZUo5sSD33M="
 							},
@@ -3173,7 +3190,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 633,
-									"top": 445,
+									"top": 460,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 30,
@@ -3193,7 +3210,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 619,
-									"top": 448,
+									"top": 463,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -3213,7 +3230,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 660,
-									"top": 441,
+									"top": 456,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -3261,7 +3278,7 @@
 							"tail": {
 								"$ref": "AAAAAAGWsei+Usy+uuA="
 							},
-							"points": "603:624;648:624;648:426",
+							"points": "603:624;648:624;648:441",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGWselyRM2/EvI="
@@ -4210,15 +4227,17 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 352,
+									"left": 339,
 									"top": 331,
+									"width": 27.1044921875,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
 									"hostEdge": {
 										"$ref": "AAAAAAGWtvV+t8Af//E="
 									},
-									"edgePosition": 1
+									"edgePosition": 1,
+									"text": "+1..*"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -4314,9 +4333,9 @@
 										"$ref": "AAAAAAGWtvV+t8Ac8RA="
 									},
 									"font": "Arial;13;0",
-									"left": 355,
+									"left": 354,
 									"top": 412,
-									"width": 19.5126953125,
+									"width": 20,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -4583,9 +4602,9 @@
 										"$ref": "AAAAAAGWtvnuR8ZD4yk="
 									},
 									"font": "Arial;13;0",
-									"left": 308,
+									"left": 307,
 									"top": 383,
-									"width": 19.5126953125,
+									"width": 20,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -4835,6 +4854,16 @@
 									"name": "cantidad",
 									"visibility": "private",
 									"type": "int"
+								},
+								{
+									"_type": "UMLAttribute",
+									"_id": "AAAAAAGWtxI5mgb44xk=",
+									"_parent": {
+										"$ref": "AAAAAAGWsZUo5cSAJMQ="
+									},
+									"name": "cliente Cliente",
+									"visibility": "private",
+									"type": ""
 								}
 							],
 							"operations": [
