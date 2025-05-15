@@ -1,9 +1,11 @@
 package co.edu.poli.ISW3.controlador;
 
+import java.util.Arrays;
+
 import co.edu.poli.ISW3.modelo.Cliente;
+import co.edu.poli.ISW3.modelo.EstadoPagado;
 import co.edu.poli.ISW3.modelo.Pedido;
 import co.edu.poli.ISW3.modelo.Producto;
-import co.edu.poli.ISW3.modelo.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,160 +14,118 @@ import javafx.scene.control.TextArea;
 public class ControladorFormulario {
 
 	@FXML
-	private Button bttChain;
+	private Button bttCancelar;
 
 	@FXML
-	private Button bttStrategy;
+	private Button bttEntregar;
 
 	@FXML
-	private Button bttdescuento10;
+	private Button bttEnviar;
 
 	@FXML
-	private Button bttdescuentofijo;
+	private Button bttMostrar;
 
 	@FXML
-	private Button bttsindescuento;
+	private Button bttPagar;
+
+	@FXML
+	private Button bttState;
 
 	@FXML
 	private TextArea txtArea1;
 
+	private Pedido pedido;
+
 	@FXML
-	void Chain(ActionEvent event) {
-
-		String texto = "";
-
-		Cliente cliente = new Cliente("101", "Robert");
-		texto += " Cliente: " + cliente.getNombre() + " (ID: " + cliente.getId() + ")";
-
-		texto += "\n";
-		Producto producto = new Producto("Teclado", 50.0, 3);
-		texto += " Producto: " + producto.getNombre() + " - Precio: $" + producto.getPrecio() + " - Stock: "
-				+ producto.getStock();
-
-		texto += "\n";
-
-		Pedido pedido1 = new Pedido(cliente, producto, 2);
-		texto += " Pedido: " + pedido1.getCantidad() + " unidades de " + pedido1.getProducto().getNombre();
-
-		texto += "\n";
-
-		Handler verificador = new StockVerificator();
-		Handler procesador = new PaymentProcessor();
-		Handler confirmador = new ConfirmingOrder();
-
-		verificador.setSiguiente(procesador);
-		procesador.setSiguiente(confirmador);
-
-		texto += "\nProcesando pedido:";
-		verificador.manejar(pedido1);
-		texto += "\n";
-		texto += ((StockVerificator) verificador).ejecutar(pedido1);
-		texto += "\n";
-		texto += ((PaymentProcessor) procesador).ejecutar(pedido1);
-		texto += "\n";
-		texto += ((ConfirmingOrder) confirmador).ejecutar(pedido1);
-		texto += "\n";
-		texto += "Stock restante: " + producto.getStock() + "\n";
-
-		txtArea1.setText(texto);
+	void State(ActionEvent event) {
+		Cliente cliente = new Cliente("001", "Juan Pérez");
+		Producto p1 = new Producto("Camisa", 55.99);
+		Producto p2 = new Producto("Pantalón", 89.99);
+		pedido = new Pedido(cliente, Arrays.asList(p1, p2));
+		txtArea1.setText("Pedido inicializado.");
 	}
 
 	@FXML
-	void Descuento10(ActionEvent event) {
-
-		Producto teclado = new Producto("Teclado", 100, 0);
-		Producto mouse = new Producto("Mouse", 50, 0);
-
-		Pedido pedido = new Pedido(null, mouse, 0);
-		pedido.agregarProducto(teclado);
-		pedido.agregarProducto(mouse);
-		
-		// Calcular con 10% de descuento
-		pedido.setEstrategia(new DescuentoPorcentaje(0.10));
-		double totalDescuentoPorcentaje = pedido.calcularTotal();
-
-		StringBuilder sb = new StringBuilder();
-		sb.append("Productos:\n");
-		for (Producto producto : pedido.getProductos()) {
-			sb.append("- ").append(producto.getNombre()).append(": $").append(producto.getPrecio()).append(" USD\n");
+	void StateMostrar(ActionEvent event) {
+		if (pedido == null) {
+			txtArea1.setText("Primero inicializa el pedido.");
+			return;
 		}
 
-		sb.append("\n");
-		sb.append("Total con 10% de descuento: $").append(totalDescuentoPorcentaje).append("\n");
-
+		StringBuilder sb = new StringBuilder();
+		sb.append("Cliente: ").append(pedido.getCliente().getNombre()).append(" (ID: ")
+				.append(pedido.getCliente().getId()).append(")\n");
+		sb.append("Estado del pedido: ").append(pedido.obtenerEstado()).append("\n");
+		sb.append("Productos:\n");
+		for (Producto p : pedido.getProductos()) {
+			sb.append("- ").append(p.getNombre()).append(" ($").append(p.getPrecio()).append(")\n");
+		}
+		sb.append("Total: $").append(pedido.calcularTotal());
 		txtArea1.setText(sb.toString());
 	}
 
 	@FXML
-	void DescuentoFijo(ActionEvent event) {
-
-		Producto teclado = new Producto("Teclado", 100, 0);
-		Producto mouse = new Producto("Mouse", 50, 0);
-
-		Pedido pedido = new Pedido(null, mouse, 0);
-		pedido.agregarProducto(teclado);
-		pedido.agregarProducto(mouse);
-		
-		// Calcular con descuento fijo de $20
-		pedido.setEstrategia(new DescuentoFijo(20));
-		double totalDescuentoFijo = pedido.calcularTotal();
-
-		StringBuilder sb = new StringBuilder();
-		sb.append("Productos:\n");
-		for (Producto producto : pedido.getProductos()) {
-			sb.append("- ").append(producto.getNombre()).append(": $").append(producto.getPrecio()).append(" USD\n");
+	void StatePagar(ActionEvent event) {
+		if (pedido == null) {
+			txtArea1.setText("Primero inicializa el pedido.");
+			return;
 		}
 
-		sb.append("\n");
-		sb.append("Total con descuento fijo de $20: $").append(totalDescuentoFijo).append("\n");
-
-		txtArea1.setText(sb.toString());
+		if (pedido.obtenerEstado().equals("Creado")) {
+			pedido.avanzarEstado();
+			txtArea1.setText("Estado actual: " + pedido.obtenerEstado());  
+		} else {
+			txtArea1.setText("El pedido solo puede pagarse si está en estado 'Creado'. \nEstado actual: " + pedido.obtenerEstado());
+		}
 	}
 
 	@FXML
-	void SinDescuento(ActionEvent event) {
-
-		Producto teclado = new Producto("Teclado", 100, 0);
-		Producto mouse = new Producto("Mouse", 50, 0);
-
-		Pedido pedido = new Pedido(null, mouse, 0);
-		pedido.agregarProducto(teclado);
-		pedido.agregarProducto(mouse);
-		
-		// Calcular sin descuento
-		pedido.setEstrategia(new SinDescuento());
-		double totalSinDescuento = pedido.calcularTotal();
-
-		StringBuilder sb = new StringBuilder();
-		sb.append("Productos:\n");
-		for (Producto producto : pedido.getProductos()) {
-			sb.append("- ").append(producto.getNombre()).append(": $").append(producto.getPrecio()).append(" USD\n");
+	void StateEnviar(ActionEvent event) {
+		if (pedido == null) {
+			txtArea1.setText("Primero inicializa el pedido.");
+			return;
 		}
 
-		sb.append("\n");
-		sb.append("Total sin descuento: $").append(totalSinDescuento).append("\n");
-
-		txtArea1.setText(sb.toString());
+		if (pedido.obtenerEstado().equals("Pagado")) {
+			pedido.avanzarEstado();
+			txtArea1.setText("Pedido enviado. \nEstado actual: " + pedido.obtenerEstado());
+		} else {
+			txtArea1.setText(
+					"Para enviar el pedido, debe estar en estado 'Pagado'. Estado actual: " + pedido.obtenerEstado());
+		}
 	}
 
 	@FXML
-	void Strategy(ActionEvent event) {
-
-		Producto teclado = new Producto("Teclado", 100, 0);
-		Producto mouse = new Producto("Mouse", 50, 0);
-
-		Pedido pedido = new Pedido(null, mouse, 0);
-		pedido.agregarProducto(teclado);
-		pedido.agregarProducto(mouse);
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("Productos:\n");
-		for (Producto producto : pedido.getProductos()) {
-			sb.append("- ").append(producto.getNombre()).append(": $").append(producto.getPrecio()).append(" USD\n");
+	void StateEntregar(ActionEvent event) {
+		if (pedido == null) {
+			txtArea1.setText("Primero inicializa el pedido.");
+			return;
 		}
 
-		txtArea1.setText(sb.toString());
-
+		if (pedido.obtenerEstado().equals("Enviado")) {
+			pedido.avanzarEstado();
+			txtArea1.setText("Pedido entregado correctamente.\n Estado actual: " + pedido.obtenerEstado());
+		} else {
+			txtArea1.setText("Para entregar el pedido, debe estar en estado 'Enviado'. Estado actual: "
+					+ pedido.obtenerEstado());
+		}
 	}
 
+	@FXML
+	void StateCancelar(ActionEvent event) {
+		if (pedido == null) {
+			txtArea1.setText("Primero inicializa el pedido.");
+			return;
+		}
+
+		String estadoAnterior = pedido.obtenerEstado();
+		pedido.cancelarPedido();
+		String estadoActual = pedido.obtenerEstado();
+
+		if (estadoAnterior.equals(estadoActual)) {
+			txtArea1.setText("No se pudo cancelar el pedido. \nEstado actual: " + estadoActual);
+		} else {
+			txtArea1.setText("Pedido cancelado. \nEstado actual: " + estadoActual);
+		}
+	}
 }
