@@ -24,9 +24,10 @@
                   <Button fx:id="bttCancelar" layoutX="17.0" layoutY="150.0" mnemonicParsing="false" onAction="#StateCancelar" prefHeight="27.0" prefWidth="76.0" text="Cancelar " />
                   <Button fx:id="bttState" layoutX="17.0" layoutY="14.0" mnemonicParsing="false" onAction="#State" prefHeight="25.0" prefWidth="153.0" text="Patron State" />
                   <Button fx:id="bttMostrar" layoutX="104.0" layoutY="49.0" mnemonicParsing="false" onAction="#StateMostrar" text="Mostrar" />
-                  <Button fx:id="bttMediator" layoutX="423.0" layoutY="14.0" mnemonicParsing="false" onAction="#Mediator" prefHeight="27.0" prefWidth="156.0" text="Mediator" />
-                  <TextField fx:id="txtnombre" layoutX="423.0" layoutY="49.0" prefHeight="27.0" prefWidth="68.0" promptText="nombre" />
-                  <TextField fx:id="txtcantidad" layoutX="423.0" layoutY="83.0" prefHeight="27.0" prefWidth="69.0" promptText="cantidad" />
+                  <Button fx:id="bttMediator" layoutX="423.0" layoutY="49.0" mnemonicParsing="false" onAction="#Mediator" prefHeight="27.0" prefWidth="156.0" text="Patron Mediator" />
+                  <TextField fx:id="txtnombre" layoutX="424.0" layoutY="83.0" prefHeight="27.0" prefWidth="68.0" promptText="nombre" />
+                  <TextField fx:id="txtcantidad" layoutX="423.0" layoutY="117.0" prefHeight="27.0" prefWidth="69.0" promptText="cantidad" />
+                  <Label fx:id="lblproducto" layoutX="423.0" layoutY="28.0" text="Producto: laptop" />
                </children></AnchorPane>
       </content>
     </Tab>
