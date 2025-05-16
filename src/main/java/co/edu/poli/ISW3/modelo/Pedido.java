@@ -6,6 +6,8 @@ public class Pedido {
 	private Cliente cliente;
 	private List<Producto> productos;
 	private EstadoPedido estado;
+	private Producto producto;
+	private int cantidad;
 
 	public Cliente getCliente() {
 		return cliente;
@@ -27,10 +29,12 @@ public class Pedido {
 		return estado;
 	}
 
-	public Pedido(Cliente cliente, List<Producto> productos) {
-		this.cliente = cliente;
-		this.productos = productos;
-		this.estado = new EstadoCreado();
+	public Pedido(Cliente cliente, List<Producto> productos, Producto producto2, int cantidad2) {
+	    this.cliente = cliente;
+	    this.productos = productos;
+	    this.producto = producto2;
+	    this.cantidad = cantidad2;
+	    this.estado = new EstadoCreado();
 	}
 
 	public void setEstado(EstadoPedido estado) {
@@ -60,5 +64,10 @@ public class Pedido {
 
 	public double calcularTotal() {
 		return productos.stream().mapToDouble(Producto::getPrecio).sum();
+	}
+
+	public String mostrarDetalle() {
+		return "Pedido registrado: " + cantidad + " unidad(es) de " + producto.getNombre()
+				+ " para el cliente: " + cliente.getNombre();
 	}
 }

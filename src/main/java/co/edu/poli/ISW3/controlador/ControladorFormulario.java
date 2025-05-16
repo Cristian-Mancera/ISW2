@@ -4,14 +4,25 @@ import java.util.Arrays;
 
 import co.edu.poli.ISW3.modelo.Cliente;
 import co.edu.poli.ISW3.modelo.EstadoPagado;
+import co.edu.poli.ISW3.modelo.MediatorConcrete;
 import co.edu.poli.ISW3.modelo.Pedido;
 import co.edu.poli.ISW3.modelo.Producto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 public class ControladorFormulario {
+
+	@FXML
+	private TextField txtnombre;
+
+	@FXML
+	private TextField txtcantidad;
+
+	@FXML
+	private Button bttMediator;
 
 	@FXML
 	private Button bttCancelar;
@@ -39,9 +50,9 @@ public class ControladorFormulario {
 	@FXML
 	void State(ActionEvent event) {
 		Cliente cliente = new Cliente("001", "Juan Pérez");
-		Producto p1 = new Producto("Camisa", 55.99);
-		Producto p2 = new Producto("Pantalón", 89.99);
-		pedido = new Pedido(cliente, Arrays.asList(p1, p2));
+		Producto p1 = new Producto("Camisa", 55.99, 0);
+		Producto p2 = new Producto("Pantalón", 89.99, 0);
+		pedido = new Pedido(cliente, Arrays.asList(p1, p2), p2, 0);
 		txtArea1.setText("Pedido inicializado.");
 	}
 
@@ -73,9 +84,10 @@ public class ControladorFormulario {
 
 		if (pedido.obtenerEstado().equals("Creado")) {
 			pedido.avanzarEstado();
-			txtArea1.setText("Estado actual: " + pedido.obtenerEstado());  
+			txtArea1.setText("Estado actual: " + pedido.obtenerEstado());
 		} else {
-			txtArea1.setText("El pedido solo puede pagarse si está en estado 'Creado'. \nEstado actual: " + pedido.obtenerEstado());
+			txtArea1.setText("El pedido solo puede pagarse si está en estado 'Creado'. \nEstado actual: "
+					+ pedido.obtenerEstado());
 		}
 	}
 
@@ -127,5 +139,25 @@ public class ControladorFormulario {
 		} else {
 			txtArea1.setText("Pedido cancelado. \nEstado actual: " + estadoActual);
 		}
+	}
+
+	@FXML
+	void Mediator(ActionEvent event) {
+
+		String texto = "\n";
+
+		MediatorConcrete mediator = new MediatorConcrete();
+
+		Cliente cliente = new Cliente("1", txtnombre.getText());
+		Producto producto = new Producto("Laptop", 0, 5);
+
+		texto += mediator.registrarPedido(cliente, producto, Integer.parseInt(txtcantidad.getText()));
+
+		texto += "\n";
+
+		txtArea1.setText(texto);
+		
+		System.out.println(Integer.parseInt(txtcantidad.getText()));
+
 	}
 }
